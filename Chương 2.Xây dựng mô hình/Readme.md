@@ -29,6 +29,8 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 
 ### 2.2.2 Hình thức đua.
 
+![](img/RaceType.png)
+
 ### 2.2.3 Thuật toán huấn luyện và siêu tham số.
 
 ![algorithms](img/algorithms.png)
