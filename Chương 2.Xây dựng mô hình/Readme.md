@@ -103,7 +103,7 @@ Thuật toán thưởng (Reward Function):
 
 ![](img/RewardF.png)
 - Basic Reward Function: Thưởng theo đường trung tâm Xác định khoảng cách từ xe đến trung tâm và thưởng cao hơn nếu xe ở gần trung tâm hơn (khuyến khích xe theo sát đường trung tâm)
-'''
+```
 def reward_function(params):
 
     
@@ -127,19 +127,21 @@ def reward_function(params):
         reward = 1e-3  #đâm / đi chệch hướng
 
     return reward
-'''
-- Ad
-'''
+```
 
-'''
 - Ad
-'''
+```
 
-'''
+```
+
 - Ad
-'''
+```
 
-'''
+```
+- Ad
+```
+
+```
 Điều kiện dừng huấn luyện sau 1 khoảng thời gian (tính theo phút)
 
 ![](img/StopCondition.png)
