@@ -9,12 +9,20 @@
 ## 3.2 Cách tham dự.
 
 - Ở trang chính của AWS DeepRacer, chọn mục **Your models** ở bên phải:
+
 ![1](img/1.jpg)
+
 - Chọn một model bất kì
+
 ![2](img/2.jpg)
+
 - Nhấn nút **Submit to virtual race**
+
 ![3](img/3.jpg)
+
 - Bảng cuộc đua Re:Invent 2021 sẽ hiện ra, chọn model mình cảm thấy tốt nhất sau đó nhất **Submit**
+
 ![4](img/4.jpg)
+
 ## 3.3 Tự tạo đường đua cho riêng mình.
 - Ở trang chính của AWS DeepRacer, chọn mục **Community races** ở bên phải:
