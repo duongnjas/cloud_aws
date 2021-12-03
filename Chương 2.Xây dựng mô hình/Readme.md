@@ -7,11 +7,14 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 
 ![](img/Ga-ra.png)
 ### 2.1.2 Tùy chỉnh mô hình của mình.
-- Ngoại hình:
+- Ngoại hình: Mặc định chỉ có 1 Vehical model, thay vào đó chúng ta có thể đổi màu cho Vehical model
 
 ![](img/Shape.png)
 
 - Camera:
+	- Nếu bạn muốn đua trên một chiếc xe duy nhất trên đường đua time-trial , hãy cân nhắc sử dụng camera đơn. Để đua quanh một đường đua mà không có xe hoặc chướng ngại vật khác, bạn không cần phải có đầu vào phức tạp, hơn nữa, bạn càng đi càng phức tạp thì quá trình đào tạo sẽ mất nhiều thời gian hơn.
+	- Cân nhắc sử dụng cảm biến camera âm thanh nổi khi bạn muốn xây dựng mô hình tránh vật thể hoặc mô hình đua xe head-to-head. Bạn sẽ cần sử dụng chức năng phần thưởng theo cách để mô hình học được các đặc điểm chiều sâu từ hình ảnh của bạn, điều có thể làm được với máy ảnh âm thanh nổi. Lưu ý rằng trong các mô hình đua xe đối đầu, camera âm thanh nổi có thể không đủ để che các điểm mù.
+	- Cân nhắc thêm LIDAR vào mô hình của bạn nếu bạn muốn tham gia vào các cuộc đua head-to-head. Cảm biến LIDAR hướng về phía sau và quét cách xe khoảng 0,5m. Nó sẽ phát hiện những chiếc xe đang tiến đến từ phía sau hoặc trong những điểm mù khi rẽ.
 
 ![](img/Camera.png)
 ## 2.2 Xây dựng mô hình.
@@ -19,7 +22,7 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 ![](img/Createmodel.png)
 
 ### 2.2.1 Tên mô hình và loại đường đua.
-- Chọn tên cho mô hình
+- Chọn tên cho mô hình, thêm mô tả (nếu có)
 
 ![](img/ModelName.png)
 
@@ -28,9 +31,16 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 ![](img/Tracks.png)
 
 ### 2.2.2 Hình thức đua.
+- Time trial: chạy đua với đồng hồ trên một đường đua được đánh dấu rõ ràng mà không có chướng ngại vật cố định hoặc đối thủ cạnh tranh đang di chuyển.
 
 ![](img/RaceType.png)
 
+- Object avoidance: Xe chạy trên đường hai làn với một số chướng ngại vật cố định được đặt dọc theo đường.
+
+![](img/ObjectAvoid.png)
+- Head-to-Head: Xe chạy đua với các phương tiện đang di chuyển khác trên đường dành cho hai làn đường.
+
+![](img/Head-to-head.png)
 ### 2.2.3 Thuật toán huấn luyện và siêu tham số.
 
 ![algorithms](img/algorithms.png)
@@ -99,10 +109,10 @@ Không gian liên tục        |  Không gian rời rạc
 ![](img/Models.png)
 
 ### 2.2.6 Tinh chỉnh các thuật toán thưởng và điều kiện dừng.
-####Thuật toán thưởng (Reward Function): 
+- Thuật toán thưởng (Reward Function): 
 
 ![](img/RewardF.png)
--  Thuật toán thưởng cơ bản (Basic Reward Function): trước tiên chúng ta tạo ba dải xung quanh đường đua, sử dụng ba điểm đánh dấu, sau đó tiến hành thưởng cho chiếc xe nhiều hơn khi lái trong dải hẹp thay vì dải trung bình hoặc dải rộng. Cũng cần lưu ý sự khác biệt về kích thước của phần thưởng. Chúng tôi đưa ra phần thưởng là 1 nếu ở trong dải hẹp, 0,5 nếu ở trong dải trung bình và 0,1 nếu ở trong dải rộng. Nếu chúng tôi giảm phần thưởng cho dải hẹp hoặc tăng phần thưởng cho dải trung bình, về cơ bản chúng tôi đang khuyến khích chiếc xe sử dụng một phần lớn hơn của bề mặt đường đua. Điều này có thể hữu ích, đặc biệt là khi có các góc cua gấp.
+	-  Thuật toán thưởng cơ bản (Basic Reward Function): trước tiên chúng ta tạo ba dải xung quanh đường đua, sử dụng ba điểm đánh dấu, sau đó tiến hành thưởng cho chiếc xe nhiều hơn khi lái trong dải hẹp thay vì dải trung bình hoặc dải rộng. Cũng cần lưu ý sự khác biệt về kích thước của phần thưởng. Chúng tôi đưa ra phần thưởng là 1 nếu ở trong dải hẹp, 0,5 nếu ở trong dải trung bình và 0,1 nếu ở trong dải rộng. Nếu chúng tôi giảm phần thưởng cho dải hẹp hoặc tăng phần thưởng cho dải trung bình, về cơ bản chúng tôi đang khuyến khích chiếc xe sử dụng một phần lớn hơn của bề mặt đường đua. Điều này có thể hữu ích, đặc biệt là khi có các góc cua gấp.
 
 ```
 def reward_function(params):
@@ -131,7 +141,7 @@ def reward_function(params):
 
     return reward
 ```
-- Thuật toán thưởng cơ bản: thưởng khi xe đi trong đường biên của đường đua
+	- Thuật toán thưởng cơ bản: thưởng khi xe đi trong đường biên của đường đua
 
 ```
 def reward_function(params):
@@ -154,7 +164,8 @@ def reward_function(params):
 
     return reward
 ```
-- Hàm thưởng nâng cao (Advanced reward function) giúp xử phạt việc đánh lái quá mức (chạy zig=zag) và thúc đẩy việc đi theo đường trung tâm.
+	- Hàm thưởng nâng cao (Advanced reward function) giúp xử phạt việc đánh lái quá mức (chạy zig=zag) và thúc đẩy việc đi theo đường trung tâm.
+
 ```
 def reward_function(params):
     '''
@@ -191,7 +202,7 @@ def reward_function(params):
     return float(reward)
 ```
 
-- Hàm thưởng nâng cao sẽ trừng phạt việc đi chậm và thúc đẩy việc theo sau đường trung tâm.
+	- Hàm thưởng nâng cao sẽ trừng phạt việc đi chậm và thúc đẩy việc theo sau đường trung tâm.
 ```
 def reward_function(params):
 
@@ -218,7 +229,7 @@ def reward_function(params):
 
 	return float(reward)
 ```
-- Hàm thưởng nâng cao cho loại đua head-to-head
+	- Hàm thưởng nâng cao cho loại đua head-to-head
 ```
 import math
 def reward_function(params):
@@ -267,7 +278,7 @@ def reward_function(params):
     reward += 1.0 * reward_lane + 4.0 * reward_avoid
     return reward
 ```
-Điều kiện dừng huấn luyện sau 1 khoảng thời gian (tính theo phút)
+- Điều kiện dừng huấn luyện sau 1 khoảng thời gian (tính theo phút)
 
 ![](img/StopCondition.png)
 - Ta có thể tích để thử nghiệm độ hiệu quả của mô hình ta đã training được bằng cách tham gia cuộc đua reInvent2021
