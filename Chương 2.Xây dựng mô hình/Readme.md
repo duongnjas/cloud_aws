@@ -37,10 +37,10 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 
 - Object avoidance: Xe chạy trên đường hai làn với một số chướng ngại vật cố định được đặt dọc theo đường.
 
-![](img/ObjectAvoid.png)
+![](img/ObjectAvoidance.png)
 - Head-to-Head: Xe chạy đua với các phương tiện đang di chuyển khác trên đường dành cho hai làn đường.
 
-![](img/Head-to-head.png)
+![](img/HeadToHead.png)
 ### 2.2.3 Thuật toán huấn luyện và siêu tham số.
 
 ![algorithms](img/algorithms.png)
