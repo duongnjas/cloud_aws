@@ -7,10 +7,13 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 
 ![](img/Gara.png)
 ### 2.1.2 Tùy chỉnh mô hình của mình.
-- Camera:
-
 - Ngoại hình:
 
+![](img/Shape.png)
+
+- Camera:
+
+![](img/Camera.png)
 ## 2.2 Xây dựng mô hình.
 
 ![](img/Createmodel.png)
@@ -20,7 +23,7 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 
 ![](img/ModelName.png)
 
-- Chọn đường đua để huấn luyện
+- Chọn đường đua để huấn luyện mô hình
 
 ![](img/Tracks.png)
 
