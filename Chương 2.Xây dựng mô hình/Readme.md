@@ -100,6 +100,9 @@ Không gian liên tục        |  Không gian rời rạc
 
 ### 2.2.6 Tinh chỉnh các thuật toán thưởng và điều kiện dừng.
 
+![](img/RewardF.png)
+
+![](img/StopCondition.png)
 - Ta có thể tích để thử nghiệm độ hiệu quả của mô hình ta đã training được bằng cách tham gia cuộc đua reInvent2021
 
 ![](img/reInvent21.png)
