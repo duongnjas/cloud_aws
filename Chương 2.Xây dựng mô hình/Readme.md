@@ -109,7 +109,7 @@ Không gian liên tục        |  Không gian rời rạc
 ![](img/Models.png)
 
 ### 2.2.6 Tinh chỉnh các thuật toán thưởng và điều kiện dừng.
-* Thuật toán thưởng (Reward Function): 
+* Thuật toán thưởng (Reward Function): model chúng ta có thể thay đổi Reward function để giúp model trở lên tốt hơn. Sau đó nhấn `validate` để đánh giá thuật toán
 
 ![](img/RewardF.png)
 
