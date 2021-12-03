@@ -64,9 +64,44 @@ PPO             |  SAC
 | Number of episodes between each training |  Thông số này kiểm soát lượng trải nghiệm mà chiếc xe sẽ có được giữa mỗi lần lặp lại đào tạo mô hình. Đối với các vấn đề phức tạp hơn có nhiều cực đại cục bộ hơn, bộ đệm trải nghiệm lớn hơn là cần thiết để cung cấp nhiều điểm dữ liệu không tương quan hơn. Trong trường hợp này, việc đào tạo sẽ chậm hơn nhưng ổn định hơn. Các giá trị được đề xuất là 10, 20 và 40.                           |
 
 ### 2.2.4 Cách thức vận hành của mô hình.
+- Sự quan trọng của không gian hành động (**action space**): 
+	- Trong học tập củng cố, tập hợp tất cả các hành động hoặc lựa chọn hợp lệ, có sẵn cho một mô hình khi nó tương tác với một môi trường được gọi là không gian hành động. Trong bảng điều khiển AWS DeepRacer, bạn có thể đào tạo các nhân viên trong không gian hành động rời rạc hoặc liên tục.
+	- Khi đào tạo mô hình AWS DeepRacer, không gian hành động xác định tốc độ và sự kết hợp góc lái nào khả dụng cho mô hình. Một hành động là sự kết hợp tốc độ và góc lái duy nhất hoặc sự lựa chọn mà một mô hình có thể thực hiện.
+- Lựa chọn giữa 2 không gian:
+	- Không gian liên tục: Không gian hành động liên tục cho phép tác nhân chọn một hành động từ một loạt các giá trị cho mỗi trạng thái.
+	- Không gian hành động rời rạc đại diện cho tất cả các hành động có thể có của tác nhân đối với mỗi trạng thái trong một tập hợp hữu hạn.
+- Các tham số:
+	- **Steering angle** (Góc lái): Góc lái xác định phạm vi góc lái mà bánh trước của mô hình của bạn có thể quay.
+	- **Speed** (Tốc độ): Tốc độ mà mô hình có thể đạt được. Tốc độ tối đa/tối thiểu được xác định sẵn cho mô hình. 
+
+Không gian liên tục        |  Không gian rời rạc
+:-------------------------:|:-------------------------:
+![](img/ConAP.png)  |  ![](img/DisAP.png)
 
 ### 2.2.5 Chọn mô hình.
+- Có thể chọn mô hình tùy theo ý thích, với hình dưới bên trái là mô hình mình tự tạo, bên phải là mô hình đã được tạo sẵn.
+
+![](img/Models.png)
 
 ### 2.2.6 Tinh chỉnh các thuật toán thưởng và điều kiện dừng.
 
+- Ta có thể tích để thử nghiệm độ hiệu quả của mô hình ta đã training được bằng cách tham gia cuộc đua reInvent2021
+
+![](img/reInvent21.png)
+
 ## 2.3 Đánh giá hiệu suất mô hình.
+- Sau khi hoàn tất, mô hình sẽ được khởi tạo
+
+![](img/model_training.png)
+
+- Khi mô hình của bạn đã được đào tạo một thời gian, bạn sẽ thấy những điều sau:
+	- Biểu đồ phần thưởng ở bên trái. Biểu đồ phần thưởng vẽ biểu đồ phần thưởng trung bình cho mỗi lần lặp lại đào tạo và tiến trình trung bình cho mỗi lần lặp lại đào tạo theo mặc định. 
+	- Luồng video mô phỏng ở bên phải. Điều này hiển thị luồng video từ trình mô phỏng, cung cấp chế độ xem của người thứ ba về ô tô của bạn khi nó đang học và cũng là chế độ xem bản đồ từ trên không hình trong ảnh hữu ích.
+
+![](img/Training.png)
+
+- Stop condition sẽ là điều kiện thời gian mà mô hình sẽ dừng hành động huấn luyện lại.
+- Lúc đầu, mô hình của bạn sẽ không thể lái trên đường thẳng nhưng khi nó học được hành vi lái xe tốt hơn, bạn sẽ thấy hiệu suất của nó được cải thiện và biểu đồ phần thưởng tăng lên. Hơn nữa, khi bạn lái xe ra khỏi đường đua, nó sẽ được đặt lại trên đường đua. Mô hình sẽ không phải chạy từ vị trí xuất phát mà sẽ có những điểm lưu vị trí để mô hình có thể tiếp tục huấn luyện của mình. Cuối cùng, nếu bạn thấy mô hình của mình lái chệch hướng và không đặt lại được, thì đây là lúc kinh nghiệm thu được sẽ được gửi lại cho Amazon SageMaker để đào tạo mô hình. Khi mô hình đã được cập nhật, mô hình mới sẽ được gửi lại cho AWS RoboMaker và xe sẽ hoạt động trở lại.
+- Sau khi huấn luyện xong, ta có thể thử kiểm tra độ hiệu quả của mô hình, hình dưới là sau khi đã kiểm tra xong độ hiệu quả.
+
+![](img/Evaluation.png)
