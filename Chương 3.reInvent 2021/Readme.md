@@ -26,3 +26,35 @@
 
 ## 3.3 Tự tạo đường đua cho riêng mình.
 - Ở trang chính của AWS DeepRacer, chọn mục **Community races** ở bên phải:
+
+![6](img/6.png)
+
+- Chọn nút **Create race**
+
+![5](img/5.png)
+
+- Chọn format đua và cách thức đua
+
+![11](img/11.png)
+
+- Đặt tên và chọn ngày cuộc đua bắt đầu và nhấn **Next**
+
+![12](img/12.png)
+
+- Chọn đường đua mà mình muốn tạo
+
+![7](img/7.png)
+
+- Chỉnh sửa một vài thông số như điều kiện chiến thắng, số lap và khoảng dừng khi bị lệch khỏi đường đua sau đó nhất **Next**
+
+![8](img/8.png)
+
+- Bảng review lại đường đua mình đã tạo hiện ra, nhấn **Submit**
+
+![9](img/9.png)
+
+- Một đường dẫn sẽ xuất hiện, ta có thể gửi để mời bạn bè cùng tham gia
+
+![10](img/10.png)
+
+
