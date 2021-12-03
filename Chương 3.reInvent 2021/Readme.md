@@ -22,7 +22,13 @@
 
 - Bảng cuộc đua Re:Invent 2021 sẽ hiện ra, chọn model mình cảm thấy tốt nhất sau đó nhất **Submit**
 
-![4](img/4.png)
+Xếp hạng của model trên Leaderboard
+
+![13](img/13.png)
+
+Model thực hiện đường đùa
+
+![Race](img/Race.gif)
 
 ## 3.3 Tự tạo đường đua cho riêng mình.
 - Ở trang chính của AWS DeepRacer, chọn mục **Community races** ở bên phải:
@@ -33,7 +39,8 @@
 
 ![5](img/5.png)
 
-- Chọn format đua và cách thức đua
+- Chọn format đua và cách thức đua  
+Có 3 cách thức đua gồm Đua với thời gian, Đua với bot và Vượt chướng ngại vật
 
 ![11](img/11.png)
 
@@ -45,7 +52,8 @@
 
 ![7](img/7.png)
 
-- Chỉnh sửa một vài thông số như điều kiện chiến thắng, số lap và khoảng dừng khi bị lệch khỏi đường đua sau đó nhất **Next**
+- Chỉnh sửa một vài thông số như điều kiện chiến thắng, số lap và khoảng dừng khi bị lệch khỏi đường đua sau đó nhất **Next**  
+Điều kiện chiến thắng gồm Thời gian hoàn thành 1 lap, Thời gian trung bình hoàn thành của 1 lap và Tổng thời gian hoàn thành tất cả lap
 
 ![8](img/8.png)
 
