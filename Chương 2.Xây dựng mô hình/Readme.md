@@ -16,6 +16,13 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 ![](img/Createmodel.png)
 
 ### 2.2.1 Tên mô hình và loại đường đua.
+- Chọn tên cho mô hình
+
+![](img/ModelName.png)
+
+- Chọn đường đua để huấn luyện
+
+![](img/Tracks.png)
 
 ### 2.2.2 Hình thức đua.
 
