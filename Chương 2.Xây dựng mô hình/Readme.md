@@ -18,6 +18,7 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 
 ![](img/Camera.png)
 ## 2.2 Xây dựng mô hình.
+- Đầu tiên chọn `Create model`
 
 ![](img/Createmodel.png)
 
@@ -31,14 +32,14 @@ Ga-ra cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riên
 ![](img/Tracks.png)
 
 ### 2.2.2 Hình thức đua.
-- Time trial: chạy đua với đồng hồ trên một đường đua được đánh dấu rõ ràng mà không có chướng ngại vật cố định hoặc đối thủ cạnh tranh đang di chuyển.
+- `Time trial`: chạy đua với đồng hồ trên một đường đua được đánh dấu rõ ràng mà không có chướng ngại vật cố định hoặc đối thủ cạnh tranh đang di chuyển.
 
 ![](img/RaceType.png)
 
-- Object avoidance: Xe chạy trên đường hai làn với một số chướng ngại vật cố định được đặt dọc theo đường.
+- `Object avoidance`: Xe chạy trên đường hai làn với một số chướng ngại vật cố định được đặt dọc theo đường.
 
 ![](img/ObjectAvoidance.png)
-- Head-to-Head: Xe chạy đua với các phương tiện đang di chuyển khác trên đường dành cho hai làn đường.
+- `Head-to-Head`: Xe chạy đua với các phương tiện đang di chuyển khác trên đường dành cho hai làn đường.
 
 ![](img/HeadToHead.png)
 ### 2.2.3 Thuật toán huấn luyện và siêu tham số.
@@ -109,7 +110,7 @@ Không gian liên tục        |  Không gian rời rạc
 ![](img/Models.png)
 
 ### 2.2.6 Tinh chỉnh các thuật toán thưởng và điều kiện dừng.
-* Thuật toán thưởng (Reward Function): model chúng ta có thể thay đổi Reward function để giúp model trở lên tốt hơn. Sau đó nhấn `validate` để đánh giá thuật toán
+* Thuật toán thưởng (Reward Function): model chúng ta có thể thay đổi Reward function để giúp model trở lên tốt hơn. Sau đó nhấn `Validate` để đánh giá thuật toán
 
 ![](img/RewardF.png)
 
@@ -287,7 +288,7 @@ def reward_function(params):
 ![](img/reInvent21.png)
 
 ## 2.3 Đánh giá hiệu suất mô hình.
-- Sau khi hoàn tất, mô hình sẽ được khởi tạo
+- Sau khi hoàn tất (nhấn `Done`), mô hình sẽ được khởi tạo
 
 ![](img/model_training.png)
 
