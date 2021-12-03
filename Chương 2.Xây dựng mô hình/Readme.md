@@ -109,10 +109,11 @@ Không gian liên tục        |  Không gian rời rạc
 ![](img/Models.png)
 
 ### 2.2.6 Tinh chỉnh các thuật toán thưởng và điều kiện dừng.
-- Thuật toán thưởng (Reward Function): 
+* Thuật toán thưởng (Reward Function): 
 
 ![](img/RewardF.png)
-	-  Thuật toán thưởng cơ bản (Basic Reward Function): trước tiên chúng ta tạo ba dải xung quanh đường đua, sử dụng ba điểm đánh dấu, sau đó tiến hành thưởng cho chiếc xe nhiều hơn khi lái trong dải hẹp thay vì dải trung bình hoặc dải rộng. Cũng cần lưu ý sự khác biệt về kích thước của phần thưởng. Chúng tôi đưa ra phần thưởng là 1 nếu ở trong dải hẹp, 0,5 nếu ở trong dải trung bình và 0,1 nếu ở trong dải rộng. Nếu chúng tôi giảm phần thưởng cho dải hẹp hoặc tăng phần thưởng cho dải trung bình, về cơ bản chúng tôi đang khuyến khích chiếc xe sử dụng một phần lớn hơn của bề mặt đường đua. Điều này có thể hữu ích, đặc biệt là khi có các góc cua gấp.
+
+-  Thuật toán thưởng cơ bản (Basic Reward Function): trước tiên chúng ta tạo ba dải xung quanh đường đua, sử dụng ba điểm đánh dấu, sau đó tiến hành thưởng cho chiếc xe nhiều hơn khi lái trong dải hẹp thay vì dải trung bình hoặc dải rộng. Cũng cần lưu ý sự khác biệt về kích thước của phần thưởng. Chúng tôi đưa ra phần thưởng là 1 nếu ở trong dải hẹp, 0,5 nếu ở trong dải trung bình và 0,1 nếu ở trong dải rộng. Nếu chúng tôi giảm phần thưởng cho dải hẹp hoặc tăng phần thưởng cho dải trung bình, về cơ bản chúng tôi đang khuyến khích chiếc xe sử dụng một phần lớn hơn của bề mặt đường đua. Điều này có thể hữu ích, đặc biệt là khi có các góc cua gấp.
 
 ```
 def reward_function(params):
@@ -141,7 +142,7 @@ def reward_function(params):
 
     return reward
 ```
-	- Thuật toán thưởng cơ bản: thưởng khi xe đi trong đường biên của đường đua
+- Thuật toán thưởng cơ bản: thưởng khi xe đi trong đường biên của đường đua
 
 ```
 def reward_function(params):
@@ -164,7 +165,7 @@ def reward_function(params):
 
     return reward
 ```
-	- Hàm thưởng nâng cao (Advanced reward function) giúp xử phạt việc đánh lái quá mức (chạy zig=zag) và thúc đẩy việc đi theo đường trung tâm.
+- Hàm thưởng nâng cao (Advanced reward function) giúp xử phạt việc đánh lái quá mức (chạy zig=zag) và thúc đẩy việc đi theo đường trung tâm.
 
 ```
 def reward_function(params):
@@ -202,7 +203,7 @@ def reward_function(params):
     return float(reward)
 ```
 
-	- Hàm thưởng nâng cao sẽ trừng phạt việc đi chậm và thúc đẩy việc theo sau đường trung tâm.
+- Hàm thưởng nâng cao sẽ trừng phạt việc đi chậm và thúc đẩy việc theo sau đường trung tâm.
 ```
 def reward_function(params):
 
@@ -229,7 +230,7 @@ def reward_function(params):
 
 	return float(reward)
 ```
-	- Hàm thưởng nâng cao cho loại đua head-to-head
+- Hàm thưởng nâng cao cho loại đua head-to-head
 ```
 import math
 def reward_function(params):
@@ -278,10 +279,10 @@ def reward_function(params):
     reward += 1.0 * reward_lane + 4.0 * reward_avoid
     return reward
 ```
-- Điều kiện dừng huấn luyện sau 1 khoảng thời gian (tính theo phút)
+* Điều kiện dừng huấn luyện sau 1 khoảng thời gian (tính theo phút)
 
 ![](img/StopCondition.png)
-- Ta có thể tích để thử nghiệm độ hiệu quả của mô hình ta đã training được bằng cách tham gia cuộc đua reInvent2021
+* Ta có thể tích để thử nghiệm độ hiệu quả của mô hình ta đã training được bằng cách tham gia cuộc đua reInvent2021
 
 ![](img/reInvent21.png)
 
