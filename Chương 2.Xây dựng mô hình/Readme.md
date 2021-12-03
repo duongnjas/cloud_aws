@@ -99,14 +99,17 @@ Không gian liên tục        |  Không gian rời rạc
 ![](img/Models.png)
 
 ### 2.2.6 Tinh chỉnh các thuật toán thưởng và điều kiện dừng.
-Thuật toán thưởng (Reward Function): 
+####Thuật toán thưởng (Reward Function): 
 
 ![](img/RewardF.png)
-- Basic Reward Function: Thưởng theo đường trung tâm Xác định khoảng cách từ xe đến trung tâm và thưởng cao hơn nếu xe ở gần trung tâm hơn (khuyến khích xe theo sát đường trung tâm)
+-  Thuật toán thưởng cơ bản (Basic Reward Function): trước tiên chúng ta tạo ba dải xung quanh đường đua, sử dụng ba điểm đánh dấu, sau đó tiến hành thưởng cho chiếc xe nhiều hơn khi lái trong dải hẹp thay vì dải trung bình hoặc dải rộng. Cũng cần lưu ý sự khác biệt về kích thước của phần thưởng. Chúng tôi đưa ra phần thưởng là 1 nếu ở trong dải hẹp, 0,5 nếu ở trong dải trung bình và 0,1 nếu ở trong dải rộng. Nếu chúng tôi giảm phần thưởng cho dải hẹp hoặc tăng phần thưởng cho dải trung bình, về cơ bản chúng tôi đang khuyến khích chiếc xe sử dụng một phần lớn hơn của bề mặt đường đua. Điều này có thể hữu ích, đặc biệt là khi có các góc cua gấp.
+
 ```
 def reward_function(params):
-
-    
+    '''
+    Thưởng theo đường trung tâm Xác định khoảng cách từ xe đến trung tâm và thưởng cao hơn nếu xe ở gần trung tâm hơn 
+    (khuyến khích xe theo sát đường trung tâm)
+    '''
     # Nhận thông số đầu vào
     track_width = params['track_width']
     distance_from_center = params['distance_from_center']
@@ -128,19 +131,141 @@ def reward_function(params):
 
     return reward
 ```
-
-- Ad
-```
+- Thuật toán thưởng cơ bản: thưởng khi xe đi trong đường biên của đường đua
 
 ```
+def reward_function(params):
+    '''
+    Thưởng khi xe lại trong hai đường biên của đường đua
+    '''
+    
+    # Nhận thông số đầu vào
+    all_wheels_on_track = params['all_wheels_on_track']
+    distance_from_center = params['distance_from_center']
+    track_width = params['track_width']
+    
+    # Mặc định là đưa ra phần thưởng rất thấp 
+    reward = 1e-3
 
-- Ad
+    # Trao phần thưởng cao nếu không có bánh xe nào chệch khỏi đường đua và 
+    # chiếc ô tô đang ở đâu đó giữa biên giới đường đua
+    if all_wheels_on_track and (0.5*track_width - distance_from_center) >= 0.05:
+        reward = 1.0
+
+    return reward
+```
+- Hàm thưởng nâng cao (Advanced reward function) giúp xử phạt việc đánh lái quá mức (chạy zig=zag) và thúc đẩy việc đi theo đường trung tâm.
+```
+def reward_function(params):
+    '''
+    Function phạt lái giúp giảm thiểu hành vi lạng lách đánh võng
+    '''
+    
+    # Nhận thông số đầu vào
+    distance_from_center = params['distance_from_center']
+    track_width = params['track_width']
+    abs_steering = abs(params['steering_angle']) # Only need the absolute steering angle
+
+    # Tính 3 điểm xa và xa hơn khỏi đường tâm
+    marker_1 = 0.1 * track_width
+    marker_2 = 0.25 * track_width
+    marker_3 = 0.5 * track_width
+
+    # Thưởng cao hơn nếu xe gần đường trung tâm hơn và ngược lại
+    if distance_from_center <= marker_1:
+        reward = 1.0
+    elif distance_from_center <= marker_2:
+        reward = 0.5
+    elif distance_from_center <= marker_3:
+        reward = 0.1
+    else:
+        reward = 1e-3  # đâm / đi chệch hướng
+
+    # Ngưỡng phạt lái, thay đổi số dựa trên cài đặt không gian hành động của bạn
+    ABS_STEERING_THRESHOLD = 15 
+
+    #  Phạt nếu xe bẻ lái quá nhiều
+    if abs_steering > ABS_STEERING_THRESHOLD:
+        reward *= 0.8
+
+    return float(reward)
 ```
 
+- Hàm thưởng nâng cao sẽ trừng phạt việc đi chậm và thúc đẩy việc theo sau đường trung tâm.
 ```
-- Ad
-```
+def reward_function(params):
 
+
+	# Tính 3 điểm xa và xa hơn khỏi đường tâm
+	marker_1 = 0.1 * params['track_width']
+	marker_2 = 0.25 * params['track_width']
+	marker_3 = 0.5 * params['track_width']
+
+	# Thưởng cao hơn nếu xe gần đường trung tâm hơn và ngược lại
+	if params['distance_from_center'] <= marker_1:
+		reward = 1
+	elif params['distance_from_center'] <= marker_2:
+		reward = 0.5
+	elif params['distance_from_center'] <= marker_3:
+		reward = 0.1
+	else:
+		reward = 1e-3  # likely crashed/ close to off track
+
+	# Phạt nếu xe chạy với tốc độ dưới 0.5m/s
+	SPEED_THRESHOLD = 0.5
+	if params['speed'] < SPEED_THRESHOLD:
+		reward *= 0.5
+
+	return float(reward)
+```
+- Hàm thưởng nâng cao cho loại đua head-to-head
+```
+import math
+def reward_function(params):
+    '''
+    Thưởng cho xe ở trong đường biên và 
+    phạt khi đến quá gần các đối tượng khác ở phía trước
+    '''
+    all_wheels_on_track = params['all_wheels_on_track']
+    distance_from_center = params['distance_from_center']
+    track_width = params['track_width']
+    objects_location = params['objects_location']
+    agent_x = params['x']
+    agent_y = params['y']
+    _, next_object_index = params['closest_objects']
+    objects_left_of_center = params['objects_left_of_center']
+    is_left_of_center = params['is_left_of_center']
+
+    # Khởi tạo phần thưởng bằng một số nhỏ nhưng không phải số 0 
+    # vì số 0 có nghĩa là chệch hướng hoặc gặp sự cố
+    reward = 1e-3
+
+    #Thưởng nếu xe ở trong hai biên của đường đua
+    if all_wheels_on_track and (0.5 * track_width - distance_from_center) >= 0.05:
+        reward_lane = 1.0
+    else:
+        reward_lane = 1e-3
+    # Phạt nếu xe ở quá gần đối tượng tiếp theo
+    reward_avoid = 1.0
+
+    # Khoảng cách đến đối tượng khác
+    next_object_loc = objects_location[next_object_index]
+    distance_closest_object = math.sqrt((agent_x - next_object_loc[0])**2 + (agent_y - next_object_loc[1])**2)
+    
+    # Quyết định xem xe và đối tượng tiếp theo có trên cùng một làn đường hay không
+    is_same_lane = objects_left_of_center[next_object_index] == is_left_of_center
+    if is_same_lane:
+        if 0.5 <= distance_closest_object < 0.8:
+            reward_avoid *= 0.5
+        elif 0.3 <= distance_closest_object < 0.5:
+            reward_avoid *= 0.2
+        elif distance_closest_object < 0.3:
+            reward_avoid = 1e-3  # Likely crashed
+
+    # Tính phần thưởng bằng cách đặt các trọng số khác nhau cho 
+    # hai khía cạnh ở trên
+    reward += 1.0 * reward_lane + 4.0 * reward_avoid
+    return reward
 ```
 Điều kiện dừng huấn luyện sau 1 khoảng thời gian (tính theo phút)
 
