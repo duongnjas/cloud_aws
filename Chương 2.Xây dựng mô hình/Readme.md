@@ -4,6 +4,7 @@
 
 ### 2.1.1 Gara.
 Nhà để xe cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riêng mình mà sau đó bạn sẽ sử dụng để đào tạo các mô hình. Theo mặc định, Ga-ra chứa The Original DeepRacer. DeepRacer ban đầu sử dụng một máy ảnh mặt trước, mạng nơ-ron phức hợp 3 lớp.
+
 ![](img/Gara.png)
 ### 2.1.2 Tùy chỉnh mô hình của mình.
 - Camera:
