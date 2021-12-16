@@ -1,9 +1,7 @@
 # Chương 4: Thực nghiệm
 
-## 4.1 Tạo model
+Qua tìm hiểu và thực nghiệm, nhóm đã rút ra được một số mô hình phù hợp cho việc huấn luyện và đạt được một thứ hạng không quá thấp trong cuộc đua reInvent:2021
 
-## 4.2 Huấn luyện và đánh giá
+![](img/rank.png)
 
-## 4.3 Kết quả đạt được
-
-## 4.4 Những reward function thu được
+Những mô hình đã được đẩy lên trong thư mục.
